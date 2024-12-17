@@ -4,51 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Основы Vue</title>
-		<style>
-			[v-cloak] {
-				display: none;
-			}
-		</style>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
     <link rel="stylesheet" href="theme.css" />
   </head>
   <body>
+    <div class="container" id="app" v-cloak>
+      <div class="card">
+        <h1>План по изучению Vue.js</h1>
 
-  <div class="container" id="app" v-cloak>
-    <div class="card">
-      <h1>План по изучению Vue.js</h1>
-
-      <div class="steps">
-        <div class="steps-content">
-          {{currentStep.text}}
-        </div>
-        <ul class="steps-list">
-          <li @click ='setActive(i)' v-for="(step, i) in steps"  :class="{
+        <div class="steps">
+          <div class="steps-content">{{currentStep.text}}</div>
+          <ul class="steps-list">
+            <li
+              @click="setActive(i)"
+              v-for="(step, i) in steps"
+              :class="{
 						'steps-item':true,
 						'active': i === activeIndex,
 						'done': i < activeIndex,
-					}">
-						<span>{{step.number}}</span> {{step.title}}
-					</li>
-        </ul>
-        <div >
-          <button v-if="!isFinished" @click="prev" :disabled="isPrevDisabled" class="btn">Назад</button>
-          <button @click="next" :class="{
+					}"
+            >
+              <span>{{step.number}}</span> {{step.title}}
+            </li>
+          </ul>
+          <div>
+            <button
+              v-if="!isFinished"
+              @click="prev"
+              :disabled="isPrevDisabled"
+              class="btn"
+            >
+              Назад
+            </button>
+            <button
+              @click="next"
+              :class="{
 						'btn': true,
 						'primary': true,
 						'hidden': isLastStep,
-					}">Вперед</button>
-					<button v-if="!isFinished" @click="finish" :class="{
+					}"
+            >
+              Вперед
+            </button>
+            <button
+              v-if="!isFinished"
+              @click="finish"
+              :class="{
 						'btn': true,
 						'primary': true,
 						'hidden': activeIndex < 4,
-					}">Закончить</button>
-					<button v-if="isFinished" @click="reset" class="btn ">Начать заново</button>
+					}"
+            >
+              Закончить
+            </button>
+            <button v-if="isFinished" @click="reset" class="btn">
+              Начать заново
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="vue.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="vue.js"></script>
   </body>
 </html>
